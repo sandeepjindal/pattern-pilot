@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pattern Pilot</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <a class="brand" href="#advisor" aria-label="Pattern Pilot home">
+        <span class="brand-mark" aria-hidden="true">PP</span>
+        <span>
+          <strong>Pattern Pilot</strong>
+          <small>Agentic design pattern advisor</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#advisor">Advisor</a>
+        <a href="#catalog">Catalog</a>
+        <a href="#runbook">Runbook</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-band" id="advisor">
+        <div class="hero-visual" aria-hidden="true">
+          <canvas id="patternCanvas" width="1120" height="720"></canvas>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">From catalog to co-pilot</p>
+          <h1>Design patterns that reason with your architecture.</h1>
+          <p>
+            Describe the behavior you need, your constraints, and what scares you.
+            Pattern Pilot turns the classic Refactoring.Guru catalog into a guided decision workflow.
+          </p>
+        </div>
+
+        <form class="advisor-panel" id="advisorForm">
+          <div class="field">
+            <label for="goal">Architecture goal</label>
+            <textarea id="goal" name="goal" rows="5">We need to let teams plug in different notification channels without changing the core workflow. It should support retries, scheduling, and test doubles.</textarea>
+          </div>
+
+          <div class="control-grid">
+            <div class="field">
+              <label for="domain">Domain</label>
+              <select id="domain" name="domain">
+                <option>Backend service</option>
+                <option>Frontend application</option>
+                <option>Platform tooling</option>
+                <option>Data pipeline</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="risk">Primary risk</label>
+              <select id="risk" name="risk">
+                <option>Change frequency</option>
+                <option>Object creation complexity</option>
+                <option>Interface mismatch</option>
+                <option>Runtime behavior switching</option>
+                <option>Cross-service coupling</option>
+              </select>
+            </div>
+            <fieldset class="field">
+              <legend>Signals</legend>
+              <label class="check"><input type="checkbox" name="signal" value="testability" checked> Testability</label>
+              <label class="check"><input type="checkbox" name="signal" value="runtime" checked> Runtime choice</label>
+              <label class="check"><input type="checkbox" name="signal" value="decoupling"> Decoupling</label>
+            </fieldset>
+          </div>
+
+          <button class="primary-action" type="submit">Generate Pattern Plan</button>
+        </form>
+      </section>
+
+      <section class="results-band" aria-live="polite">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">Recommended path</p>
+            <h2 id="recommendationTitle">Strategy with Command support</h2>
+          </div>
+          <div class="confidence">
+            <span id="confidenceValue">91%</span>
+            <small>fit confidence</small>
+          </div>
+        </div>
+
+        <div class="result-layout">
+          <article class="decision-card">
+            <h3>Why this fits</h3>
+            <p id="fitSummary">
+              Your goal asks for interchangeable behavior, isolated tests, and runtime selection. Strategy keeps channel logic swappable while Command can encapsulate scheduled or retried sends.
+            </p>
+          </article>
+          <article class="decision-card">
+            <h3>Watch for</h3>
+            <p id="watchSummary">
+              Avoid creating one class per tiny variation. Keep shared retry, tracing, and validation outside individual strategies unless the channel truly owns that policy.
+            </p>
+          </article>
+          <article class="decision-card">
+            <h3>Next action</h3>
+            <ol id="nextSteps">
+              <li>Define the stable notification contract.</li>
+              <li>Move each channel into a strategy implementation.</li>
+              <li>Wrap scheduled sends as commands with retry metadata.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="catalog-band" id="catalog">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Interactive catalog</p>
+            <h2>Browse patterns by intent and pressure.</h2>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Pattern group">
+            <button type="button" class="tab active" data-filter="all">All</button>
+            <button type="button" class="tab" data-filter="creational">Creational</button>
+            <button type="button" class="tab" data-filter="structural">Structural</button>
+            <button type="button" class="tab" data-filter="behavioral">Behavioral</button>
+          </div>
+        </div>
+        <div class="pattern-grid" id="patternGrid"></div>
+      </section>
+
+      <section class="runbook-band" id="runbook">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Agent loop</p>
+            <h2>A pattern workflow that keeps asking useful questions.</h2>
+          </div>
+        </div>
+        <div class="runbook">
+          <div>
+            <span>01</span>
+            <h3>Clarify forces</h3>
+            <p>Capture volatility, ownership, test seams, performance constraints, and where decisions happen.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <h3>Rank candidates</h3>
+            <p>Compare intent, coupling cost, cognitive load, and how reversible the design is after launch.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <h3>Draft implementation</h3>
+            <p>Produce interfaces, collaboration flow, migration steps, and focused tests before coding broadly.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <h3>Review drift</h3>
+            <p>Revisit the pattern when new requirements arrive, and retire indirection when it stops paying rent.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
